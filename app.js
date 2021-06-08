@@ -23,6 +23,7 @@ const gameBoardModule = (() => {
 
 const displayControllerModule = (() => {
   const gridDimensions = 500;
+  let array = [];
   makeGrid();
 
   function makeGrid(gridSize = 3) {
@@ -35,6 +36,7 @@ const displayControllerModule = (() => {
     for (i = 0; i < gridSize * gridSize; i++) {
       const tile = makeTile(tileSize, i);
       container.appendChild(tile);
+      array[i] = tile;
     }
   }
 
@@ -47,8 +49,9 @@ const displayControllerModule = (() => {
     tile.style.height = `${tileSize}px`;
 
     tile.addEventListener("click", function (e) {
-      this.style.backgroundColor = "red";
-      tile.innerText = playerOne.getSymbol();
+      // this.style.backgroundColor = "red";
+      // tile.innerText = playerOne.getSymbol();
+      updateTile(i);
 
       gameBoardModule.updateArray(e.target.dataset.index);
     });
@@ -56,8 +59,9 @@ const displayControllerModule = (() => {
     return tile;
   }
 
-  function updateTile() {
-    this.style.backgroundColor = "red";
+  function updateTile(i) {
+    const tile = array[i];
+    tile.style.backgroundColor = "red";
     tile.innerText = playerOne.getSymbol();
   }
 })();
