@@ -1,5 +1,3 @@
-// single: module
-// gameBoard
 const gameBoardModule = (() => {
   let array = [];
   return {
@@ -7,7 +5,6 @@ const gameBoardModule = (() => {
   };
 })();
 
-// displayController
 const displayControllerModule = (() => {
   const gridDimensions = 500;
   makeGrid();
@@ -37,8 +34,6 @@ const displayControllerModule = (() => {
   }
 })();
 
-// multiple: factory
-// player
 const playerFactory = (name, symbol) => {
   const getName = () => name;
   const getSymbol = () => symbol;
