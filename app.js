@@ -1,7 +1,23 @@
+const playerFactory = (name, symbol) => {
+  const getName = () => name;
+  const getSymbol = () => symbol;
+  return { getName, getSymbol };
+};
+
+const playerOne = playerFactory("Player One", "X");
+const playerTwo = playerFactory("Player Two", "O");
+
 const gameBoardModule = (() => {
   let array = [];
+
+  function updateArray(i) {
+    array[i] = "X";
+    console.log(array);
+  }
+
   return {
     array,
+    updateArray,
   };
 })();
 
@@ -26,19 +42,22 @@ const displayControllerModule = (() => {
     const tile = document.createElement("div");
     tile.classList.add("tile");
     tile.setAttribute("data-index", i);
-    tile.innerText = "X";
     tile.style.backgroundColor = "cyan";
     tile.style.width = `${tileSize}px`;
     tile.style.height = `${tileSize}px`;
+
+    tile.addEventListener("click", function (e) {
+      this.style.backgroundColor = "red";
+      tile.innerText = playerOne.getSymbol();
+
+      gameBoardModule.updateArray(e.target.dataset.index);
+    });
+
     return tile;
   }
+
+  function updateTile() {
+    this.style.backgroundColor = "red";
+    tile.innerText = playerOne.getSymbol();
+  }
 })();
-
-const playerFactory = (name, symbol) => {
-  const getName = () => name;
-  const getSymbol = () => symbol;
-  return { getName, getSymbol };
-};
-
-const playerOne = playerFactory("Player One", "X");
-const playerTwo = playerFactory("Player Two", "O");
