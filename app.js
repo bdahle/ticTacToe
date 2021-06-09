@@ -10,6 +10,8 @@ const playerTwo = playerFactory("Player Two", "O");
 const gameBoardModule = (() => {
   let array = [];
   let playerOneNext = true;
+  let numberOfRounds = 0;
+  let gameOver = false;
 
   function updateArray(i) {
     if (indexIsEmpty(i)) {
@@ -18,13 +20,25 @@ const gameBoardModule = (() => {
         : playerTwo.getSymbol();
       playerOneNext = !playerOneNext;
       array[i] = playerSymbol;
-      console.log(array);
       displayControllerModule.updateTile(i, playerSymbol);
+      numberOfRounds++;
+      gameOver = isGameOver();
+      console.log(gameOver);
     }
   }
 
   function indexIsEmpty(i) {
     return typeof array[i] === "undefined";
+  }
+
+  function isGameOver() {
+    return playerHasWon() || isTie();
+  }
+
+  function playerHasWon() {}
+
+  function isTie() {
+    return numberOfRounds >= 9;
   }
 
   return {
