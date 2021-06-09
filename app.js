@@ -9,10 +9,24 @@ const playerTwo = playerFactory("Player Two", "O");
 
 const gameBoardModule = (() => {
   let array = [];
+  let playerOneNext = true;
 
   function updateArray(i) {
-    array[i] = "X";
+    let playerSymbol = playerOneNext
+      ? playerOne.getSymbol()
+      : playerTwo.getSymbol();
+    playerOneNext = !playerOneNext;
+    array[i] = playerSymbol;
+    // if (playerOneNext) {
+    //   array[i] = "X";
+    //   playerOneNext = false;
+    // } else {
+    //   array[i] = "O";
+    //   playerOneNext = true;
+    // }
+
     console.log(array);
+    displayControllerModule.updateTile(i, playerSymbol);
   }
 
   return {
@@ -51,7 +65,7 @@ const displayControllerModule = (() => {
     tile.addEventListener("click", function (e) {
       // this.style.backgroundColor = "red";
       // tile.innerText = playerOne.getSymbol();
-      updateTile(i);
+      // updateTile(i);
 
       gameBoardModule.updateArray(e.target.dataset.index);
     });
@@ -59,9 +73,13 @@ const displayControllerModule = (() => {
     return tile;
   }
 
-  function updateTile(i) {
+  function updateTile(i, playerSymbol) {
     const tile = array[i];
     tile.style.backgroundColor = "red";
-    tile.innerText = playerOne.getSymbol();
+    tile.innerText = playerSymbol;
   }
+
+  return {
+    updateTile,
+  };
 })();
