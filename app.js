@@ -12,12 +12,19 @@ const gameBoardModule = (() => {
   let playerOneNext = true;
 
   function updateArray(i) {
-    let playerSymbol = playerOneNext
-      ? playerOne.getSymbol()
-      : playerTwo.getSymbol();
-    playerOneNext = !playerOneNext;
-    array[i] = playerSymbol;
-    displayControllerModule.updateTile(i, playerSymbol);
+    if (indexIsEmpty(i)) {
+      let playerSymbol = playerOneNext
+        ? playerOne.getSymbol()
+        : playerTwo.getSymbol();
+      playerOneNext = !playerOneNext;
+      array[i] = playerSymbol;
+      console.log(array);
+      displayControllerModule.updateTile(i, playerSymbol);
+    }
+  }
+
+  function indexIsEmpty(i) {
+    return typeof array[i] === "undefined";
   }
 
   return {
