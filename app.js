@@ -17,15 +17,6 @@ const gameBoardModule = (() => {
       : playerTwo.getSymbol();
     playerOneNext = !playerOneNext;
     array[i] = playerSymbol;
-    // if (playerOneNext) {
-    //   array[i] = "X";
-    //   playerOneNext = false;
-    // } else {
-    //   array[i] = "O";
-    //   playerOneNext = true;
-    // }
-
-    console.log(array);
     displayControllerModule.updateTile(i, playerSymbol);
   }
 
@@ -63,10 +54,6 @@ const displayControllerModule = (() => {
     tile.style.height = `${tileSize}px`;
 
     tile.addEventListener("click", function (e) {
-      // this.style.backgroundColor = "red";
-      // tile.innerText = playerOne.getSymbol();
-      // updateTile(i);
-
       gameBoardModule.updateArray(e.target.dataset.index);
     });
 
