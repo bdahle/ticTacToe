@@ -62,7 +62,8 @@ const displayControllerModule = (() => {
 
   function updateTile(i, playerSymbol) {
     const tile = array[i];
-    tile.style.backgroundColor = "red";
+    tile.style.backgroundColor =
+      playerSymbol === playerOne.getSymbol() ? "red" : "blue";
     tile.innerText = playerSymbol;
   }
 
