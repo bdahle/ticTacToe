@@ -36,7 +36,7 @@ const gameBoardModule = (() => {
   }
 
   function moveIsWinning(i, playerSymbol) {
-    return checkHorizontal(i, playerSymbol);
+    return checkHorizontal(i, playerSymbol) || checkVertical(i, playerSymbol);
   }
 
   function checkHorizontal(i, playerSymbol) {
@@ -65,6 +65,32 @@ const gameBoardModule = (() => {
     }
     console.log("wins");
     return true;
+  }
+
+  function checkVertical(i, playerSymbol) {
+    switch (i) {
+      case 0:
+      case 3:
+      case 6:
+        if (array[0] !== playerSymbol) return false;
+        if (array[3] !== playerSymbol) return false;
+        if (array[6] !== playerSymbol) return false;
+        return true;
+      case 1:
+      case 4:
+      case 7:
+        if (array[1] !== playerSymbol) return false;
+        if (array[4] !== playerSymbol) return false;
+        if (array[7] !== playerSymbol) return false;
+        return true;
+      case 2:
+      case 5:
+      case 8:
+        if (array[2] !== playerSymbol) return false;
+        if (array[5] !== playerSymbol) return false;
+        if (array[8] !== playerSymbol) return false;
+        return true;
+    }
   }
 
   function isTie() {
