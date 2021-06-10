@@ -12,4 +12,5 @@
   border-width: 8px;
   font-size: 170px;
   text-align: center;
+  user-select: none;
 }
