@@ -36,7 +36,11 @@ const gameBoardModule = (() => {
   }
 
   function moveIsWinning(i, playerSymbol) {
-    return checkHorizontal(i, playerSymbol) || checkVertical(i, playerSymbol);
+    return (
+      checkHorizontal(i, playerSymbol) ||
+      checkVertical(i, playerSymbol) ||
+      checkDiagonals(i, playerSymbol)
+    );
   }
 
   function checkHorizontal(i, playerSymbol) {
@@ -89,6 +93,25 @@ const gameBoardModule = (() => {
         if (array[2] !== playerSymbol) return false;
         if (array[5] !== playerSymbol) return false;
         if (array[8] !== playerSymbol) return false;
+        return true;
+    }
+  }
+
+  function checkDiagonals(i, playerSymbol) {
+    switch (i) {
+      case 0:
+      case 4:
+      case 8:
+        if (array[0] !== playerSymbol) return false;
+        if (array[4] !== playerSymbol) return false;
+        if (array[8] !== playerSymbol) return false;
+        return true;
+      case 2:
+      case 4:
+      case 6:
+        if (array[2] !== playerSymbol) return false;
+        if (array[4] !== playerSymbol) return false;
+        if (array[6] !== playerSymbol) return false;
         return true;
     }
   }
