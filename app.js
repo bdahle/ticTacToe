@@ -22,7 +22,7 @@ const gameBoardModule = (() => {
       array[i] = playerSymbol;
       displayControllerModule.updateTile(i, playerSymbol);
       numberOfRounds++;
-      gameOver = isGameOver();
+      gameOver = isGameOver(i, playerSymbol);
       console.log(gameOver);
     }
   }
@@ -31,11 +31,41 @@ const gameBoardModule = (() => {
     return typeof array[i] === "undefined";
   }
 
-  function isGameOver() {
-    return moveIsWinning() || isTie();
+  function isGameOver(i, playerSymbol) {
+    return moveIsWinning(i, playerSymbol) || isTie();
   }
 
-  function moveIsWinning() {}
+  function moveIsWinning(i, playerSymbol) {
+    return checkHorizontal(i, playerSymbol);
+  }
+
+  function checkHorizontal(i, playerSymbol) {
+    switch (i) {
+      case 0:
+      case 1:
+      case 2:
+        return checkArrayHorizontal(0, 2, playerSymbol);
+      case 3:
+      case 4:
+      case 5:
+        return checkArrayHorizontal(3, 5, playerSymbol);
+      case 6:
+      case 7:
+      case 8:
+        return checkArrayHorizontal(6, 8, playerSymbol);
+    }
+  }
+
+  function checkArrayHorizontal(first, last, playerSymbol) {
+    for (i = first; i < last + 1; i++) {
+      if (array[i] !== playerSymbol) {
+        console.log("nope");
+        return false;
+      }
+    }
+    console.log("wins");
+    return true;
+  }
 
   function isTie() {
     return numberOfRounds >= 9;
@@ -75,7 +105,7 @@ const displayControllerModule = (() => {
     tile.style.height = `${tileSize}px`;
 
     tile.addEventListener("click", function (e) {
-      gameBoardModule.updateArray(e.target.dataset.index);
+      gameBoardModule.updateArray(i);
     });
 
     return tile;
