@@ -9,20 +9,26 @@ const playerTwo = playerFactory("Player Two", "O");
 
 const gameBoardModule = (() => {
   let array = [];
-  let playerOneNext = true;
+  // let playerOneNext = true;
+  let currentPlayer = playerTwo;
   let numberOfRounds = 0;
   let gameOver = false;
 
   function updateArray(i) {
     if (indexIsEmpty(i)) {
-      let playerSymbol = playerOneNext
-        ? playerOne.getSymbol()
-        : playerTwo.getSymbol();
-      playerOneNext = !playerOneNext;
-      array[i] = playerSymbol;
-      displayControllerModule.updateTile(i, playerSymbol);
+      // let playerSymbol = playerOneNext
+      //   ? playerOne.getSymbol()
+      //   : playerTwo.getSymbol();
+      // playerOneNext = !playerOneNext;
+      if (currentPlayer == playerOne) {
+        currentPlayer = playerTwo;
+      } else if (currentPlayer == playerTwo) {
+        currentPlayer = playerOne;
+      }
+      array[i] = currentPlayer.getSymbol();
+      displayControllerModule.updateTile(i, currentPlayer);
       numberOfRounds++;
-      gameOver = isGameOver(i, playerSymbol);
+      gameOver = isGameOver(i, currentPlayer);
       console.log(gameOver);
     }
   }
@@ -31,85 +37,85 @@ const gameBoardModule = (() => {
     return typeof array[i] === "undefined";
   }
 
-  function isGameOver(i, playerSymbol) {
-    return moveIsWinning(i, playerSymbol) || isTie();
+  function isGameOver(i, currentPlayer) {
+    return moveIsWinning(i, currentPlayer) || isTie();
   }
 
-  function moveIsWinning(i, playerSymbol) {
+  function moveIsWinning(i, currentPlayer) {
     return (
-      checkHorizontal(i, playerSymbol) ||
-      checkVertical(i, playerSymbol) ||
-      checkDiagonals(i, playerSymbol)
+      checkHorizontal(i, currentPlayer) ||
+      checkVertical(i, currentPlayer) ||
+      checkDiagonals(i, currentPlayer)
     );
   }
 
-  function checkHorizontal(i, playerSymbol) {
+  function checkHorizontal(i, currentPlayer) {
     switch (i) {
       case 0:
       case 1:
       case 2:
-        return checkArrayHorizontal(0, 2, playerSymbol);
+        return checkArrayHorizontal(0, 2, currentPlayer);
       case 3:
       case 4:
       case 5:
-        return checkArrayHorizontal(3, 5, playerSymbol);
+        return checkArrayHorizontal(3, 5, currentPlayer);
       case 6:
       case 7:
       case 8:
-        return checkArrayHorizontal(6, 8, playerSymbol);
+        return checkArrayHorizontal(6, 8, currentPlayer);
     }
   }
 
-  function checkArrayHorizontal(first, last, playerSymbol) {
+  function checkArrayHorizontal(first, last, currentPlayer) {
     for (i = first; i < last + 1; i++) {
-      if (array[i] !== playerSymbol) {
+      if (array[i] !== currentPlayer.getSymbol()) {
         return false;
       }
     }
     return true;
   }
 
-  function checkVertical(i, playerSymbol) {
+  function checkVertical(i, currentPlayer) {
     switch (i) {
       case 0:
       case 3:
       case 6:
-        if (array[0] !== playerSymbol) return false;
-        if (array[3] !== playerSymbol) return false;
-        if (array[6] !== playerSymbol) return false;
+        if (array[0] !== currentPlayer.getSymbol()) return false;
+        if (array[3] !== currentPlayer.getSymbol()) return false;
+        if (array[6] !== currentPlayer.getSymbol()) return false;
         return true;
       case 1:
       case 4:
       case 7:
-        if (array[1] !== playerSymbol) return false;
-        if (array[4] !== playerSymbol) return false;
-        if (array[7] !== playerSymbol) return false;
+        if (array[1] !== currentPlayer.getSymbol()) return false;
+        if (array[4] !== currentPlayer.getSymbol()) return false;
+        if (array[7] !== currentPlayer.getSymbol()) return false;
         return true;
       case 2:
       case 5:
       case 8:
-        if (array[2] !== playerSymbol) return false;
-        if (array[5] !== playerSymbol) return false;
-        if (array[8] !== playerSymbol) return false;
+        if (array[2] !== currentPlayer.getSymbol()) return false;
+        if (array[5] !== currentPlayer.getSymbol()) return false;
+        if (array[8] !== currentPlayer.getSymbol()) return false;
         return true;
     }
   }
 
-  function checkDiagonals(i, playerSymbol) {
+  function checkDiagonals(i, currentPlayer) {
     switch (i) {
       case 0:
       case 4:
       case 8:
-        if (array[0] !== playerSymbol) return false;
-        if (array[4] !== playerSymbol) return false;
-        if (array[8] !== playerSymbol) return false;
+        if (array[0] !== currentPlayer.getSymbol()) return false;
+        if (array[4] !== currentPlayer.getSymbol()) return false;
+        if (array[8] !== currentPlayer.getSymbol()) return false;
         return true;
       case 2:
       case 4:
       case 6:
-        if (array[2] !== playerSymbol) return false;
-        if (array[4] !== playerSymbol) return false;
-        if (array[6] !== playerSymbol) return false;
+        if (array[2] !== currentPlayer.getSymbol()) return false;
+        if (array[4] !== currentPlayer.getSymbol()) return false;
+        if (array[6] !== currentPlayer.getSymbol()) return false;
         return true;
     }
   }
@@ -158,11 +164,11 @@ const displayControllerModule = (() => {
     return tile;
   }
 
-  function updateTile(i, playerSymbol) {
+  function updateTile(i, currentPlayer) {
     const tile = array[i];
     tile.style.backgroundColor =
-      playerSymbol === playerOne.getSymbol() ? "red" : "blue";
-    tile.innerText = playerSymbol;
+      currentPlayer.getSymbol() === playerOne.getSymbol() ? "red" : "blue";
+    tile.innerText = currentPlayer.getSymbol();
   }
 
   return {
