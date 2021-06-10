@@ -63,11 +63,9 @@ const gameBoardModule = (() => {
   function checkArrayHorizontal(first, last, playerSymbol) {
     for (i = first; i < last + 1; i++) {
       if (array[i] !== playerSymbol) {
-        console.log("nope");
         return false;
       }
     }
-    console.log("wins");
     return true;
   }
 
