@@ -32,10 +32,10 @@ const gameBoardModule = (() => {
   }
 
   function isGameOver() {
-    return playerHasWon() || isTie();
+    return moveIsWinning() || isTie();
   }
 
-  function playerHasWon() {}
+  function moveIsWinning() {}
 
   function isTie() {
     return numberOfRounds >= 9;
