@@ -9,17 +9,12 @@ const playerTwo = playerFactory("Player Two", "O");
 
 const gameBoardModule = (() => {
   let array = [];
-  // let playerOneNext = true;
   let currentPlayer = playerTwo;
   let numberOfRounds = 0;
   let gameOver = false;
 
   function updateArray(i) {
     if (indexIsEmpty(i)) {
-      // let playerSymbol = playerOneNext
-      //   ? playerOne.getSymbol()
-      //   : playerTwo.getSymbol();
-      // playerOneNext = !playerOneNext;
       if (currentPlayer == playerOne) {
         currentPlayer = playerTwo;
       } else if (currentPlayer == playerTwo) {
