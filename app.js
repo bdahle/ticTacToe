@@ -23,9 +23,7 @@ const gameBoardModule = (() => {
       array[i] = currentPlayer.getSymbol();
       displayControllerModule.updateTile(i, currentPlayer);
       numberOfRounds++;
-      // gameOver = isGameOver(i, currentPlayer);
 
-      console.log(gameOver);
       if (isMoveWinning(i, currentPlayer)) {
         console.log(currentPlayer.getName() + " won!");
       } else if (isTie()) {
