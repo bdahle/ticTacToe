@@ -146,6 +146,7 @@ const gameBoardModule = (() => {
 const displayControllerModule = (() => {
   const gridDimensions = 500;
   let array = [];
+  let waitForAI = false;
   makeGrid();
 
   function makeGrid(gridSize = 3) {
@@ -171,9 +172,11 @@ const displayControllerModule = (() => {
     tile.style.height = `${tileSize}px`;
 
     tile.addEventListener("click", function (e) {
-      if (gameBoardModule.makeMove(i)) {
+      if (!waitForAI && gameBoardModule.makeMove(i)) {
+        waitForAI = true;
         setTimeout(() => {
           gameBoardModule.makeRandomMove();
+          waitForAI = false;
         }, 200);
       }
     });
