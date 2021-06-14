@@ -14,21 +14,25 @@ const gameBoardModule = (() => {
   let gameOver = false;
 
   function updateArray(i) {
-    if (indexIsEmpty(i)) {
-      if (currentPlayer == playerOne) {
-        currentPlayer = playerTwo;
-      } else if (currentPlayer == playerTwo) {
-        currentPlayer = playerOne;
-      }
-      array[i] = currentPlayer.getSymbol();
-      displayControllerModule.updateTile(i, currentPlayer);
-      numberOfRounds++;
+    if (!gameOver) {
+      if (indexIsEmpty(i)) {
+        if (currentPlayer == playerOne) {
+          currentPlayer = playerTwo;
+        } else if (currentPlayer == playerTwo) {
+          currentPlayer = playerOne;
+        }
+        array[i] = currentPlayer.getSymbol();
+        displayControllerModule.updateTile(i, currentPlayer);
+        numberOfRounds++;
 
-      const resultText = document.getElementById("result");
-      if (isMoveWinning(i, currentPlayer)) {
-        resultText.innerText = currentPlayer.getName() + " won!";
-      } else if (isTie()) {
-        resultText.innerText = "Tie!";
+        const resultText = document.getElementById("result");
+        if (isMoveWinning(i, currentPlayer)) {
+          gameOver = true;
+          resultText.innerText = currentPlayer.getName() + " won!";
+        } else if (isTie()) {
+          resultText.innerText = "Tie!";
+          gameOver(true);
+        }
       }
     }
   }
