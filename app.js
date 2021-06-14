@@ -1,11 +1,12 @@
-const playerFactory = (name, symbol) => {
+const playerFactory = (name, symbol, color) => {
   const getName = () => name;
   const getSymbol = () => symbol;
-  return { getName, getSymbol };
+  const getColor = () => color;
+  return { getName, getSymbol, getColor };
 };
 
-const playerOne = playerFactory("Red player", "X");
-const playerTwo = playerFactory("Blue player", "O");
+const playerOne = playerFactory("Red player", "X", "red");
+const playerTwo = playerFactory("Blue player", "O", "blue");
 
 const gameBoardModule = (() => {
   let array = [];
@@ -186,8 +187,7 @@ const displayControllerModule = (() => {
 
   function updateTile(i, currentPlayer) {
     const tile = array[i];
-    tile.style.backgroundColor =
-      currentPlayer.getSymbol() === playerOne.getSymbol() ? "red" : "blue";
+    tile.style.backgroundColor = currentPlayer.getColor();
     tile.innerText = currentPlayer.getSymbol();
   }
 
