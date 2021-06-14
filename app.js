@@ -13,6 +13,17 @@ const gameBoardModule = (() => {
   let numberOfRounds = 0;
   let gameOver = false;
 
+  function makeRandomMove() {
+    if (!gameOver) {
+      let index;
+      while (!index) {
+        let candidateIndex = Math.floor(Math.random() * 9);
+        if (indexIsEmpty(candidateIndex)) index = candidateIndex;
+      }
+      updateArray(index);
+    }
+  }
+
   function updateArray(i) {
     if (!gameOver) {
       if (indexIsEmpty(i)) {
@@ -127,6 +138,7 @@ const gameBoardModule = (() => {
   return {
     array,
     updateArray,
+    makeRandomMove,
   };
 })();
 
@@ -159,6 +171,7 @@ const displayControllerModule = (() => {
 
     tile.addEventListener("click", function (e) {
       gameBoardModule.updateArray(i);
+      gameBoardModule.makeRandomMove();
     });
 
     return tile;
