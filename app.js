@@ -153,7 +153,7 @@ const displayControllerModule = (() => {
     const tile = document.createElement("div");
     tile.classList.add("tile");
     tile.setAttribute("data-index", i);
-    tile.style.backgroundColor = "cyan";
+    tile.style.backgroundColor = "grey";
     tile.style.width = `${tileSize}px`;
     tile.style.height = `${tileSize}px`;
 
