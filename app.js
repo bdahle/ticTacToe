@@ -171,7 +171,11 @@ const displayControllerModule = (() => {
     tile.style.height = `${tileSize}px`;
 
     tile.addEventListener("click", function (e) {
-      if (gameBoardModule.makeMove(i)) gameBoardModule.makeRandomMove();
+      if (gameBoardModule.makeMove(i)) {
+        setTimeout(() => {
+          gameBoardModule.makeRandomMove();
+        }, 200);
+      }
     });
 
     return tile;
