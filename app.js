@@ -31,7 +31,7 @@ const gameBoardModule = (() => {
           resultText.innerText = currentPlayer.getName() + " won!";
         } else if (isTie()) {
           resultText.innerText = "Tie!";
-          gameOver(true);
+          gameOver = true;
         }
       }
     }
