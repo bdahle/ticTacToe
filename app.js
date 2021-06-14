@@ -26,7 +26,6 @@ const gameBoardModule = (() => {
 
       const resultText = document.getElementById("result");
       if (isMoveWinning(i, currentPlayer)) {
-        console.log(currentPlayer.getName() + " won!");
         resultText.innerText = currentPlayer.getName() + " won!";
       } else if (isTie()) {
         resultText.innerText = "Tie!";
