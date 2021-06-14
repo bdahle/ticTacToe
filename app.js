@@ -23,8 +23,14 @@ const gameBoardModule = (() => {
       array[i] = currentPlayer.getSymbol();
       displayControllerModule.updateTile(i, currentPlayer);
       numberOfRounds++;
-      gameOver = isGameOver(i, currentPlayer);
+      // gameOver = isGameOver(i, currentPlayer);
+
       console.log(gameOver);
+      if (isMoveWinning(i, currentPlayer)) {
+        console.log(currentPlayer.getName() + " won!");
+      } else if (isTie()) {
+        console.log("Tie!");
+      }
     }
   }
 
@@ -32,11 +38,7 @@ const gameBoardModule = (() => {
     return typeof array[i] === "undefined";
   }
 
-  function isGameOver(i, currentPlayer) {
-    return moveIsWinning(i, currentPlayer) || isTie();
-  }
-
-  function moveIsWinning(i, currentPlayer) {
+  function isMoveWinning(i, currentPlayer) {
     return (
       checkHorizontal(i, currentPlayer) ||
       checkVertical(i, currentPlayer) ||
