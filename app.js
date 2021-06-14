@@ -4,8 +4,8 @@ const playerFactory = (name, symbol) => {
   return { getName, getSymbol };
 };
 
-const playerOne = playerFactory("Player One", "X");
-const playerTwo = playerFactory("Player Two", "O");
+const playerOne = playerFactory("Red player", "X");
+const playerTwo = playerFactory("Blue player", "O");
 
 const gameBoardModule = (() => {
   let array = [];
