@@ -24,10 +24,12 @@ const gameBoardModule = (() => {
       displayControllerModule.updateTile(i, currentPlayer);
       numberOfRounds++;
 
+      const resultText = document.getElementById("result");
       if (isMoveWinning(i, currentPlayer)) {
         console.log(currentPlayer.getName() + " won!");
+        resultText.innerText = currentPlayer.getName() + " won!";
       } else if (isTie()) {
-        console.log("Tie!");
+        resultText.innerText = "Tie!";
       }
     }
   }
