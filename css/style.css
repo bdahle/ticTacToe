@@ -3,8 +3,8 @@
   width: min-content;
   height: min-content;
   display: grid;
-  border-style: solid;
-  border-width: 8px;
+  /* border-style: solid;
+  border-width: 8px; */
 }
 
 #result {
@@ -13,9 +13,11 @@
 }
 
 .tile {
-  border-style: solid;
-  border-width: 8px;
+  /* border-style: solid; */
+  /* border-width: 8px; */
   font-size: 170px;
   text-align: center;
   user-select: none;
+  border-radius: 25px;
+  margin: 6px;
 }
