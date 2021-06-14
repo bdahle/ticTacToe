@@ -44,6 +44,7 @@ const gameBoardModule = (() => {
           resultText.innerText = "Tie!";
           gameOver = true;
         }
+        return true;
       }
     }
   }
@@ -170,8 +171,7 @@ const displayControllerModule = (() => {
     tile.style.height = `${tileSize}px`;
 
     tile.addEventListener("click", function (e) {
-      gameBoardModule.updateArray(i);
-      gameBoardModule.makeRandomMove();
+      if (gameBoardModule.updateArray(i)) gameBoardModule.makeRandomMove();
     });
 
     return tile;
